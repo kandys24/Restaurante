@@ -10,7 +10,7 @@ export const MenuProvider = ({ children }) => {
   useEffect(() => {
     // Load menu from localStorage
     const savedMenu = localStorage.getItem('restaurantMenu');
-    if (savedMenu) {
+    if (false) {
       setMenuData(JSON.parse(savedMenu));
     } else {
       // Default menu if none exists
@@ -27,7 +27,8 @@ export const MenuProvider = ({ children }) => {
         ]
       };
       setMenuData(defaultMenu);
-      localStorage.setItem('restaurantMenu', JSON.stringify(defaultMenu));
+      // localStorage.setItem('restaurantMenu', JSON.stringify(defaultMenu));
+      localStorage.removeItem('restaurantMenu');
     }
     setIsLoading(false);
   }, []);
