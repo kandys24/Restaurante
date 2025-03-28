@@ -18,7 +18,7 @@ export const MenuProvider = ({ children }) => {
         restaurantName: "Restaurante Dona Joaquina",
         categories: [
           {
-            name: "Starters",
+            name: "Almoço",
             items: [
               { id: 1, name: "Feijoada de Feijão Preto", description: " feito com feijão preto cozido lentamente com uma variedade de carnes", price: 2500 },
               { id: 2, name: "Churrasco com Arroz", description: "O Churrasco com Arroz e Batatas Fritas é uma refeição clássica e deliciosa, combinando suculentas carnes grelhadas no fogo com arroz soltinho e batatas fritas crocantes.", price: 3000 }
