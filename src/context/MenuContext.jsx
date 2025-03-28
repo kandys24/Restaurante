@@ -15,13 +15,13 @@ export const MenuProvider = ({ children }) => {
     } else {
       // Default menu if none exists
       const defaultMenu = {
-        restaurantName: "Gourmet Delight",
+        restaurantName: "Restaurante Dona Joaquina",
         categories: [
           {
             name: "Starters",
             items: [
-              { id: 1, name: "Bruschetta", description: "Toasted bread with tomatoes, garlic and basil", price: 8.99 },
-              { id: 2, name: "Calamari", description: "Fried squid with lemon aioli", price: 12.99 }
+              { id: 1, name: "Feijoada de Feijão Preto", description: " feito com feijão preto cozido lentamente com uma variedade de carnes", price: 2500 },
+              { id: 2, name: "Churrasco com Arroz", description: "O Churrasco com Arroz e Batatas Fritas é uma refeição clássica e deliciosa, combinando suculentas carnes grelhadas no fogo com arroz soltinho e batatas fritas crocantes.", price: 3000 }
             ]
           }
         ]
