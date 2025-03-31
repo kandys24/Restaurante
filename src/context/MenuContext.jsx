@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
 
-// Firebase configuration (replace with your actual config)
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBWu8xKi07yr_60p-IcMCqK1e8x5zdZKu8",
   authDomain: "restaurant-qr-menu-dc10b.firebaseapp.com",

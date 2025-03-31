@@ -8,7 +8,7 @@ const MenuEditor = () => {
 
   const handleSave = () => {
     updateMenu(editedMenu);
-    alert('Menu updated successfully!');
+    alert('Menu atualizado com sucesso!');
   };
 
   const addCategory = () => {
@@ -82,13 +82,13 @@ const MenuEditor = () => {
           onClick={handleSave}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
         >
-          Save Changes
+          Guardar alterações
         </button>
       </div>
 
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Restaurant Name
+          Nome do restaurante
         </label>
         <input
           type="text"
@@ -111,7 +111,7 @@ const MenuEditor = () => {
             onClick={addCategory}
             className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-200"
           >
-            Add Category
+            Add Categoria
           </button>
         </div>
       </div>
@@ -133,7 +133,7 @@ const MenuEditor = () => {
               onClick={() => removeCategory(categoryIndex)}
               className="text-white hover:text-red-200 transition-colors duration-200"
             >
-              Delete
+              Apagar
             </button>
           </div>
           
@@ -150,7 +150,7 @@ const MenuEditor = () => {
                 <div key={item.id} className="border border-gray-200 rounded-lg p-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
                       <input
                         type="text"
                         className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-amber-500"
@@ -159,7 +159,7 @@ const MenuEditor = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Preço</label>
                       <input
                         type="number"
                         step="0.01"
@@ -170,7 +170,7 @@ const MenuEditor = () => {
                     </div>
                   </div>
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
                     <textarea
                       className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-amber-500"
                       rows="2"
@@ -182,7 +182,7 @@ const MenuEditor = () => {
                     onClick={() => removeItem(categoryIndex, itemIndex)}
                     className="text-red-600 hover:text-red-800 text-sm transition-colors duration-200"
                   >
-                    Remove Item
+                    Remover Item
                   </button>
                 </div>
               ))}

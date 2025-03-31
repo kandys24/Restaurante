@@ -8,7 +8,7 @@ const AdminLayout = ({ children }) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/admin');
+    navigate('/');
   };
 
   return (
@@ -17,14 +17,14 @@ const AdminLayout = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-900">Restaurant Admin</h1>
+              <h1 className="text-xl font-bold text-gray-900">Admin do restaurante</h1>
             </div>
             <div className="flex items-center">
               <button
                 onClick={handleLogout}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-200"
               >
-                Logout
+                Sair
               </button>
             </div>
           </div>

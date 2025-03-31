@@ -15,7 +15,7 @@ const MenuLayout = ({ menuData, isLoading }) => {
   if (!menuData) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <p>Menu not available</p> {/* Error state */}
+        <p>Menu não disponível</p> {/* Error state */}
       </div>
     );
   }
