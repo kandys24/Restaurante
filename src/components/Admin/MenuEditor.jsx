@@ -131,7 +131,7 @@ const MenuEditor = () => {
             />
             <button
               onClick={() => removeCategory(categoryIndex)}
-              className="text-white hover:text-red-200 transition-colors duration-200"
+              className="text-red-800 hover:text-red-200 transition-colors duration-200"
             >
               Apagar
             </button>
