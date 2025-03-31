@@ -69,7 +69,7 @@ export const MenuProvider = ({ children }) => {
     try {
       const menuRef = doc(db, 'restaurants', 'dona_joaquina');
       await setDoc(menuRef, { menu: defaultMenu });
-      setMenuData(defaultMenu);
+      // setMenuData(defaultMenu);
     } catch (error) {
       console.error("Error creating default menu:", error);
     }
