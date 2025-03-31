@@ -12,7 +12,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <MenuLayout menuData={menuData} />
+      <MenuLayout menuData={menuData} isLoading={isLoading} />
     </div>
   );
 };

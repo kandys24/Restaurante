@@ -1,4 +1,23 @@
 import { createContext, useState, useEffect } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
+
+// Firebase configuration (replace with your actual config)
+const firebaseConfig = {
+  apiKey: "AIzaSyBWu8xKi07yr_60p-IcMCqK1e8x5zdZKu8",
+  authDomain: "restaurant-qr-menu-dc10b.firebaseapp.com",
+  projectId: "restaurant-qr-menu-dc10b",
+  storageBucket: "restaurant-qr-menu-dc10b.firebasestorage.app",
+  messagingSenderId: "441579372931",
+  appId: "1:441579372931:web:df5a7a0eb86169b71b76b6",
+  measurementId: "G-9BLWMD1YNF"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const analytics = getAnalytics(app);
 
 export const MenuContext = createContext();
 
@@ -8,51 +27,22 @@ export const MenuProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const initDB = async () => {
-      try {
-        // Open IndexedDB database
-        const request = indexedDB.open('restaurantMenuDB', 1);
-        
-        request.onupgradeneeded = (event) => {
-          const db = event.target.result;
-          if (!db.objectStoreNames.contains('menu')) {
-            db.createObjectStore('menu', { keyPath: 'id', autoIncrement: true });
-          }
-        };
-
-        request.onsuccess = (event) => {
-          const db = event.target.result;
-          const transaction = db.transaction('menu', 'readonly');
-          const store = transaction.objectStore('menu');
-          const getAllRequest = store.getAll();
-
-          getAllRequest.onsuccess = () => {
-            if (getAllRequest.result.length > 0) {
-              // Use the most recent menu
-              const latestMenu = getAllRequest.result[getAllRequest.result.length - 1];
-              setMenuData(latestMenu.data);
-            } else {
-              createDefaultMenu(db);
-            }
-            setIsLoading(false);
-          };
-        };
-
-        request.onerror = (event) => {
-          console.error('Database error:', event.target.error);
-          createDefaultMenu(); // Fallback
-          setIsLoading(false);
-        };
-      } catch (error) {
-        console.error('Error initializing DB:', error);
-        setIsLoading(false);
+    const menuRef = doc(db, 'restaurants', 'dona_joaquina');
+    
+    // Set up real-time listener
+    const unsubscribe = onSnapshot(menuRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        setMenuData(docSnapshot.data().menu);
+      } else {
+        createDefaultMenu();
       }
-    };
+      setIsLoading(false);
+    });
 
-    initDB();
+    return () => unsubscribe();
   }, []);
 
-  const createDefaultMenu = async (db) => {
+  const createDefaultMenu = async () => {
     const defaultMenu = {
       restaurantName: "Restaurante Dona Joaquina",
       categories: [
@@ -76,28 +66,22 @@ export const MenuProvider = ({ children }) => {
       ]
     };
 
-    if (db) {
-      const transaction = db.transaction('menu', 'readwrite');
-      const store = transaction.objectStore('menu');
-      store.add({ data: defaultMenu });
+    try {
+      const menuRef = doc(db, 'restaurants', 'dona_joaquina');
+      await setDoc(menuRef, { menu: defaultMenu });
+      setMenuData(defaultMenu);
+    } catch (error) {
+      console.error("Error creating default menu:", error);
     }
-    
-    setMenuData(defaultMenu);
   };
 
   const updateMenu = async (newMenu) => {
     try {
-      const request = indexedDB.open('restaurantMenuDB', 1);
-      
-      request.onsuccess = (event) => {
-        const db = event.target.result;
-        const transaction = db.transaction('menu', 'readwrite');
-        const store = transaction.objectStore('menu');
-        store.add({ data: newMenu });
-        setMenuData(newMenu);
-      };
+      const menuRef = doc(db, 'restaurants', 'dona_joaquina');
+      await setDoc(menuRef, { menu: newMenu }, { merge: true });
+      // No need to setMenuData here - the snapshot listener will handle it
     } catch (error) {
-      console.error('Error updating menu:', error);
+      console.error("Error updating menu:", error);
     }
   };
 
